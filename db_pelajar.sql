@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2021 at 04:50 AM
+-- Generation Time: Nov 15, 2021 at 04:55 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.24
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `data_pelajar` (
-  `idpelajar` int(11) NOT NULL,
+  `id_data_pelajar` int(11) NOT NULL,
   `nama_pelajar` varchar(200) NOT NULL,
   `noIC_pelajar` varchar(12) NOT NULL,
   `noMatrik_pelajar` varchar(12) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `data_pelajar` (
 -- Dumping data for table `data_pelajar`
 --
 
-INSERT INTO `data_pelajar` (`idpelajar`, `nama_pelajar`, `noIC_pelajar`, `noMatrik_pelajar`, `kelas`) VALUES
+INSERT INTO `data_pelajar` (`id_data_pelajar`, `nama_pelajar`, `noIC_pelajar`, `noMatrik_pelajar`, `kelas`) VALUES
 (1, 'Badrul Hidayat', '011016090025', '18DDT19F1005', 'DDT5B / JTMK');
 
 --
@@ -50,7 +50,7 @@ INSERT INTO `data_pelajar` (`idpelajar`, `nama_pelajar`, `noIC_pelajar`, `noMatr
 -- Indexes for table `data_pelajar`
 --
 ALTER TABLE `data_pelajar`
-  ADD PRIMARY KEY (`idpelajar`),
+  ADD PRIMARY KEY (`id_data_pelajar`),
   ADD UNIQUE KEY `noIC_pelajar` (`noIC_pelajar`),
   ADD UNIQUE KEY `noPendaftaran_pelajar` (`noMatrik_pelajar`),
   ADD UNIQUE KEY `noMatrik_pelajar` (`noMatrik_pelajar`),
@@ -64,7 +64,7 @@ ALTER TABLE `data_pelajar`
 -- AUTO_INCREMENT for table `data_pelajar`
 --
 ALTER TABLE `data_pelajar`
-  MODIFY `idpelajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_data_pelajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
