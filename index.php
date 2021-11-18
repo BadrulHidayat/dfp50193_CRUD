@@ -1,116 +1,52 @@
 <?php
-
-if(isset($_POST['submit'])){
-    $nama = $_POST['nama_pelajar'];
-    $noIC = $_POST['noIC_pelajar'];
-    $noMatrik = $_POST['noMatrik_pelajar'];
-    $kelas = $_POST['kelas'];
-    
-
-    $mysqli = new mysqli('localhost', 'root', '', 'db_pelajar');
-    $stmt = $mysqli->prepare("INSERT INTO data_pelajar(nama_pelajar,noIC_pelajar,noMatrik_pelajar,kelas) VALUES(?,?,?,?)");
-    $stmt->bind_param('ssss',$nama,$noIC,$noMatrik,$kelas);
-    $stmt->execute();
-    $msg="<div class='alert alert-success'>Booking Successfull</div>";
-    $stmt->close();
-    $mysqli->close();
-    header("Location: simpan.php");
-    die;
-}
+require 'conn.php';
 ?>
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 
-    <title>CRUD</title>
-
-    
-  </head>
-
-    <style>
-        body{
-            background: skyblue;
-            font-family: Arial, Helvetica, sans-serif;
+<body>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <tr bgcolor="#ffd700">
+            <th>Bil</th>
+            <th>Nama</th>
+            <th>No. Kad Pengenalan</th>
+            <th>No. Matrik</th>
+            <th>Kelas</th>
+            <th>Tindakan</th>
+        </tr>
+        <?php
+        $bil = 1;
+        $sql = "SELECT * FROM data_pelajar";
+        if ($result = $conn->query($sql)) {
+            while ($row = $result->fetch_object()) {
+        ?>
+                <tr>
+                    <td><?php echo $bil++; ?></td>
+                    <td><?php echo $row->nama_pelajar; ?></td>
+                    <td><?php echo $row->noIC_pelajar; ?></td>
+                    <td><?php echo $row->noMatrik_pelajar; ?></td>
+                    <td><?php echo $row->kelas; ?></td>
+                    <td>
+                        <a href="kemaskini.php?id_data_pelajar=<?php echo $row->id_data_pelajar; ?>">Edit</a>
+                        |
+                        <a href="padam.php?id_data_pelajar=<?php echo $row->id_data_pelajar; ?>" onclick="return confirm('Betul ke nak padam?');">Padam</a>
+                    </td>
+                </tr>
+        <?php
+            }
         }
-
-        h1,h2{
-            color: black;
-        }
-
-        .form-group{
-            color: black;
-  
-        }
-        table{
-            width: 100%;
-        }
-        th{
-            width: 180px;
-            color: black;
-        }
-
-        #btn{
-            background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
-            margin: 10px;
-            padding: 15px 45px;
-            text-align: center;
-            text-transform: uppercase;
-            transition: 0.5s;
-            background-size: 200% auto;
-            color: white;            
-            box-shadow: 0 0 20px #eee;
-            border-radius: 10px;
-            display: block;
-          }
-
-          #btn:hover {
-            background-position: right center; /* change the direction of the change here */
-            color: #fff;
-            text-decoration: none;
-          }
-    </style>
-
-  <body>
-    <div class="container">
-        <h2>INFO PELAJAR</h2>
-        <hr>
-        <div class="row">
-           <div class="col-md-8">
-               <?php echo(isset($msg))?$msg:""; ?>
-               <form method="post">
-                    <table>
-                        <tr>
-                            <th>Nama</th>
-                            <td><input required type="text" class="form-control" name="nama_pelajar"></td>
-                        </tr>
-                        <tr>
-                            <th>No. Kad Pengenalan</th>
-                            <td><input required type="text" class="form-control" minlength="12" maxlength="12" name="noIC_pelajar"></td>
-                        </tr>
-                        <tr>
-                            <th>No. Matrik</th>
-                            <td><input required type="text" class="form-control" minlength="12" maxlength="12" name="noMatrik_pelajar"></td>
-                        </tr>
-                        <tr>
-                            <th>Kelas</th>
-                            <td><input required type="text" class="form-control" name="kelas"></td>
-                        </tr>
-                        
-                        
-                    </table>
-                    <div class="form-group">
-                       <button id="btn"name="submit" type="submit" class="btn btn-primary">Submit</button>
-                   </div>
-               </form>
-           </div>
-            
-        </div>
-    </div>
-   
-  </body>
+        ?>
+    </table>
+    <br>
+    <a href="tambah.php"><button>Tambah Pelajar</button></a>
+</body>
 
 </html>
