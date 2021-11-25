@@ -19,7 +19,7 @@ require 'conn.php';
             <th>Nama</th>
             <th>No. Kad Pengenalan</th>
             <th>No. Matrik</th>
-            <th>Kelas</th>
+            <th>Kelas / Jabatan</th>
             <th>Tindakan</th>
         </tr>
         <?php
